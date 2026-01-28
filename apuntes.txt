@@ -1,0 +1,44 @@
+npm init -y
+npm init playwright@latest
+
+Te preguntará varias cosas, responde así:
+- **Do you want to use TypeScript or JavaScript?** → JavaScript
+- **Where to put your end-to-end tests?** → tests (presiona Enter)
+- **Add a GitHub Actions workflow?** → No (n)
+- **Install Playwright browsers?** → Yes (y)
+
+## **Paso 7: Estructura del proyecto**
+
+Después de la instalación tendrás:
+```
+ProyectoPlaywright/
+├── node_modules/
+├── tests/
+│   └── example.spec.js
+├── playwright.config.js
+├── package.json
+└── package-lock.json
+
+Inside that directory, you can run several commands:
+
+  npx playwright test
+    Runs the end-to-end tests.
+
+  npx playwright test --ui
+    Starts the interactive UI mode.
+
+  npx playwright test --project=chromium
+    Runs the tests only on Desktop Chrome.
+
+  npx playwright test example
+    Runs the tests in a specific file.
+
+  npx playwright test --debug
+    Runs the tests in debug mode.
+
+  npx playwright codegen
+    Auto generate tests with Codegen.
+
+We suggest that you begin by typing:
+
+    npx playwright test
