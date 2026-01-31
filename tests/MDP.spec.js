@@ -80,4 +80,8 @@ test('registro de formulario MVP MINJUS', async ({ page }) => {
     await expect(razonSocial).toHaveValue('MINISTERIO DE JUSTICIA Y DERECHOS HUMANOS', { timeout: 10000 });
 
     console.log('✅ Test completado exitosamente');
+
+    await datosContacto.ir();
+    
+
 });
