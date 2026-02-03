@@ -1,6 +1,8 @@
 const { test, expect } = require('@playwright/test');
+import { validarDatosContacto, completarDomicilio } from '../pages/datosContacto';
 
 test('registro de formulario MVP MINJUS', async ({ page }) => {
+
     //Le dice al navegador que vaya a una URL
     await page.goto('https://sgd.minjus.gob.pe/sgd-virtual/public/ciudadano/ciudadanoMain.xhtml');
     
@@ -81,7 +83,9 @@ test('registro de formulario MVP MINJUS', async ({ page }) => {
 
     console.log('✅ Test completado exitosamente');
 
-    await datosContacto.ir();
+    await completarDomicilio(page);
+
+    await page.waitForTimeout(20000);
     
 
 });

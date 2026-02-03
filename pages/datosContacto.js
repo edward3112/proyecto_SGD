@@ -1,18 +1,24 @@
-export class datosContacto {
-  constructor(page) {
-    this.page = page;
-    this.usuarioInput = page.locator('#username');
-    this.passwordInput = page.locator('#password');
-    this.loginButton = page.locator('#login');
-  }
+import { expect } from '@playwright/test';
 
-  async ir() {
-    await this.page.goto('https://miapp.com/login');    
-  }
+export async function validarDatosContacto(page) {
+  await expect(page.locator('text=Datos de Contacto')).toBeVisible();
+}
 
-  async login(usuario, password) {
-    await this.usuarioInput.fill(usuario);
-    await this.passwordInput.fill(password);
-    await this.loginButton.click();
-  }
+export async function completarDomicilio(page) {
+    
+    await expect(page.locator('text=Datos de Contacto')).toBeVisible();
+    await page.fill('#txtDomicilio', 'Bregante 184');
+
+    const panel = page.locator('#cboDepartamento_label');
+    await panel.waitFor({ state: 'visible'});
+    await panel.click();
+    await page.waitForTimeout(500);
+    
+    await page.locator('#cboDepartamento_filter').click();
+    await page.type('#cboDepartamento_filter','LIMA');
+    const selectedText = await page.locator('#cboDepartamento_filter').innerText();
+    expect(selectedText).toBe('LIMA');
+
+
+
 }
