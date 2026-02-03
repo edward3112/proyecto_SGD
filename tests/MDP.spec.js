@@ -5,7 +5,7 @@ test('registro de formulario MVP MINJUS', async ({ page }) => {
 
     //Le dice al navegador que vaya a una URL
     await page.goto('https://sgd.minjus.gob.pe/sgd-virtual/public/ciudadano/ciudadanoMain.xhtml');
-    
+
     //expect(page): Vamos a verificar algo sobre la página
     //.toHaveTitle(...): Verifica que el título de la pestaña sea correcto
     await expect(page).toHaveTitle(/MPV - Mesa de Partes Virtual/);
@@ -51,7 +51,7 @@ test('registro de formulario MVP MINJUS', async ({ page }) => {
     await campoRuc.pressSequentially('20131371617', { delay: 100 });
     //Valida que el campo realmente tiene el valor que escribimos
     await expect(campoRuc).toHaveValue('20131371617');
-    
+
     console.log('✅ RUC ingresado correctamente');
     await page.waitForTimeout(500);
 
@@ -59,7 +59,7 @@ test('registro de formulario MVP MINJUS', async ({ page }) => {
     const botonBuscar = page.locator('#frmBuscarEntidad\\:j_idt312');
     await botonBuscar.waitFor({ state: 'visible' });
     await botonBuscar.click();
-    
+
     console.log('✅ Botón buscar clickeado');
 
     //Espera a que el modal desaparezca
@@ -72,11 +72,11 @@ test('registro de formulario MVP MINJUS', async ({ page }) => {
 
     await expect(ruc).toBeVisible();
     await expect(razonSocial).toBeVisible();
-    
+
     // ⭐ Validar que ambos campos NO son editables (vienen de la búsqueda)
     await expect(ruc).not.toBeEditable();
     await expect(razonSocial).not.toBeEditable();
-    
+
     // Validar los valores
     await expect(ruc).toHaveValue('20131371617', { timeout: 10000 });
     await expect(razonSocial).toHaveValue('MINISTERIO DE JUSTICIA Y DERECHOS HUMANOS', { timeout: 10000 });
@@ -84,8 +84,5 @@ test('registro de formulario MVP MINJUS', async ({ page }) => {
     console.log('✅ Test completado exitosamente');
 
     await completarDomicilio(page);
-
-    await page.waitForTimeout(20000);
-    
 
 });
