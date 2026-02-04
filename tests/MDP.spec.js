@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-import { validarDatosContacto, completarDomicilio } from '../pages/datosContacto';
+import { validarDatosContacto, validarDatosDocumento } from '../pages/datosContacto';
 
 test('registro de formulario MVP MINJUS', async ({ page }) => {
 
@@ -83,6 +83,9 @@ test('registro de formulario MVP MINJUS', async ({ page }) => {
 
     console.log('✅ Test completado exitosamente');
 
-    await completarDomicilio(page);
+    await validarDatosContacto(page);
+    console.log('✅ Datos de contacto completo');
+
+    await validarDatosDocumento(page);
 
 });
