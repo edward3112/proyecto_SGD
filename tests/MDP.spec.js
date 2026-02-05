@@ -29,12 +29,11 @@ test('registro de formulario MVP MINJUS', async ({ page }) => {
         hasText: 'ENTIDAD PUBLICA'
     });
     //Espera a que la opción aparezca en pantalla
-
     await opcion.waitFor({ state: 'visible' });
     await opcion.click();
 
     //en el botón que abre el modal de búsqueda
-    await page.click('#j_idt64');
+    await page.getByRole('button', { name: 'Buscar Entidad' }).click();
     //Valida que el modal realmente apareció
     await expect(page.locator('#dlgBuscarEntidad')).toBeVisible();
 

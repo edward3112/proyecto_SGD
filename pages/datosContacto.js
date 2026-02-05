@@ -49,10 +49,18 @@ export async function validarDatosDocumento(page) {
   await servicio.waitFor({ state: 'visible' });
   await servicio.click();
 
+  //await page.locator('#cboServicio_filter').pressSequentially('PRONABI', { delay: 100 });
+  //const opcionDepa = page.locator('#cboServicio_panel .ui-selectonemenu-item', { hasText: /^PRONABI$/ });
+  //await opcionDepa.waitFor({ state: 'visible' });
+  //await opcionDepa.click();
+
   await page.locator('#cboServicio_filter').pressSequentially('PRONABI', { delay: 100 });
-  const opcionDepa = page.locator('#cboServicio_panel .ui-selectonemenu-item', { hasText: /^PRONABI$/ });
-  await opcionDepa.waitFor({ state: 'visible' });
-  await opcionDepa.click();
+  await page.waitForTimeout(500); // Esperar que filtre los resultados
+  await page.locator('#cboServicio_filter').press('Enter');
+
+
+
+
 
   await page.waitForTimeout(500);
 
