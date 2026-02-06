@@ -1,15 +1,14 @@
 const { test, expect } = require('@playwright/test');
-import { validarDatosContacto, validarDatosDocumento } from '../pages/datosContacto';
+import { validarDatosContacto, validarDatosDocumento, cargaArchivosTramite } from '../pages/datosContacto';
 
 test('registro de formulario MVP MINJUS', async ({ page }) => {
 
     //Le dice al navegador que vaya a una URL
-    await page.goto('https://sgd.minjus.gob.pe/sgd-virtual/public/ciudadano/ciudadanoMain.xhtml');
+    await page.goto('http://sgd.minjus.gob.pe/sgd-virtual/public/ciudadano/ciudadanoMain.xhtml');
 
     //expect(page): Vamos a verificar algo sobre la página
     //.toHaveTitle(...): Verifica que el título de la pestaña sea correcto
     await expect(page).toHaveTitle(/MPV - Mesa de Partes Virtual/);
-
     //locator(...Encuentra un elemento en la página usando un selector CSS
     const modal = page.locator('#dlgIntroduccion');
 
@@ -55,9 +54,7 @@ test('registro de formulario MVP MINJUS', async ({ page }) => {
     await page.waitForTimeout(500);
 
     //Ubica el boton espera que sea visible y le da click
-    const botonBuscar = page.locator('#frmBuscarEntidad\\:j_idt312');
-    await botonBuscar.waitFor({ state: 'visible' });
-    await botonBuscar.click();
+    await page.getByRole('button', { name: 'Buscar', exact: true }).click();
 
     console.log('✅ Botón buscar clickeado');
 
@@ -86,5 +83,11 @@ test('registro de formulario MVP MINJUS', async ({ page }) => {
     console.log('✅ Datos de contacto completo');
 
     await validarDatosDocumento(page);
+    console.log('✅ Datos de Documento completos');
+
+    await cargaArchivosTramite(page);
+    console.log('✅ Archivos de tramite completos');
+    
+    await page.waitForTimeout(20000);
 
 });

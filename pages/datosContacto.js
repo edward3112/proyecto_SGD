@@ -49,21 +49,45 @@ export async function validarDatosDocumento(page) {
   await servicio.waitFor({ state: 'visible' });
   await servicio.click();
 
-  //await page.locator('#cboServicio_filter').pressSequentially('PRONABI', { delay: 100 });
-  //const opcionDepa = page.locator('#cboServicio_panel .ui-selectonemenu-item', { hasText: /^PRONABI$/ });
-  //await opcionDepa.waitFor({ state: 'visible' });
-  //await opcionDepa.click();
-
   await page.locator('#cboServicio_filter').pressSequentially('PRONABI', { delay: 100 });
   await page.waitForTimeout(500); // Esperar que filtre los resultados
   await page.locator('#cboServicio_filter').press('Enter');
-
-
-
-
-
   await page.waitForTimeout(500);
 
+  const tipoDoc = page.locator('#cboTipoDocumento');
+  await tipoDoc.waitFor({ state: 'visible' });
+  await tipoDoc.click();
+  
+  await page.locator('#cboTipoDocumento_filter').pressSequentially('CARTA', { delay:100 });
+  await page.waitForTimeout(200); 
+  await page.locator('#cboTipoDocumento_filter').press('Enter');
+  await page.waitForTimeout(200); 
+  
+  await page.locator('#txtNumeroDocumento').pressSequentially('0001', { delay: 100 });
+
+  await page.locator('#txtNumeroDocumentoSigla').pressSequentially('MINJUS-ODSI', { delay: 100 });
+
+  await page.locator('#txtAsunto').pressSequentially('PRUEBA EZEVALLOS', { delay:100});
+
+  await page.locator('#txtDestinatario').click();
+  await page.locator('#txtDestinatario').pressSequentially('ODSI', { delay:100});
+  await page.waitForTimeout(200); 
+
+  await page.locator('#txtFolio').pressSequentially('10', { delay:100});
+  await page.locator('td:nth-child(3) > .ui-radiobutton').click();
+
+}
+
+export async function cargaArchivosTramite(page){
+  await expect(page.locator('text=Archivos del Tramite')).toBeVisible();
+  await page.waitForTimeout(200); 
+
+  await page.locator('#chkFlagNotificacion').click();
+  await page.waitForTimeout(200); 
+
+  await page.locator('#chkFlagDatosPersonales').click();
+
+  await page.waitForTimeout(200); 
 
 
 }
