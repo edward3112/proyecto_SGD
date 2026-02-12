@@ -4,11 +4,11 @@ import { validarDatosContacto, validarDatosDocumento, cargaArchivosTramite } fro
 test('registro de formulario MVP MINJUS', async ({ page }) => {
 
     //Le dice al navegador que vaya a una URL
-    await page.goto('http://sgd.minjus.gob.pe/sgd-virtual/public/ciudadano/ciudadanoMain.xhtml');
+    await page.goto('https://sgd.minjus.gob.pe/sgd-virtual/public/ciudadano/ciudadanoMain.xhtml');
 
     //expect(page): Vamos a verificar algo sobre la página
     //.toHaveTitle(...): Verifica que el título de la pestaña sea correcto
-    await expect(page).toHaveTitle(/MPV - Mesa de Partes Virtual/);
+    await expect(page).toHaveTitle(/MPV - MESA DE PARTES VIRTUAL/);
     //locator(...Encuentra un elemento en la página usando un selector CSS
     const modal = page.locator('#dlgIntroduccion');
 
@@ -87,7 +87,7 @@ test('registro de formulario MVP MINJUS', async ({ page }) => {
 
     await cargaArchivosTramite(page);
     console.log('✅ Archivos de tramite completos');
-    
+
     await page.waitForTimeout(20000);
 
 });
